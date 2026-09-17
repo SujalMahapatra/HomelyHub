@@ -1,4 +1,4 @@
-// ---- APIFeatures: builds the search query, 
+ // ---- APIFeatures: builds the search query, 
 // The listings page has filters, a search box and pages. Doing
 // all that inside the controller would make it 100 lines long.
 // So we keep it here, and the controller stays clean:
