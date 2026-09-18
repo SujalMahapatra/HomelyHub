@@ -14,19 +14,19 @@ const propertySchema = new mongoose.Schema({
 
     extraInfo: {
         type: String,
-        deafualt:"checkin on time, good services."
+        deafualt: "checkin on time, good services."
     },
 
     propertyType: {
         type: String,
-        enum: ["House","Flat","Guest House","Hotel"],
-        default:"House"
+        enum: ["House", "Flat", "Guest House", "Hotel"],
+        default: "House"
     },
 
     roomType: {
         type: String,
-        enum: ["Anytype","Room","Entire Home"],
-        default:"Anytype"
+        enum: ["Anytype", "Room", "Entire Home"],
+        default: "Anytype"
     },
 
     maximumGuest: {
@@ -62,21 +62,21 @@ const propertySchema = new mongoose.Schema({
     images: {
         type: [
             {
-                public_id:{
+                public_id: {
                     type: String
                 },
-                url:{
+                url: {
                     type: String,
                     required: true
                 }
 
             }
         ],
-        validate:{
-            validator:function(arr){
-                return arr.length>=6;
+        validate: {
+            validator: function (arr) {
+                return arr.length >= 6;
             },
-            message:"The images must contain at least 6 images"
+            message: "The images must contain at least 6 images"
 
         }
     },
@@ -94,9 +94,27 @@ const propertySchema = new mongoose.Schema({
         pincode: Number
     },
 
-    currentBookings: {
+    currentBookings: [
+        {
+            bookingId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Booking"
+            },
 
-    },
+            fromDate: {
+                type: Date
+            },
+
+            toDate: {
+                type: Date
+            },
+
+            userId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "User"
+            }
+        }
+    ],
 
     userId: {
         type: mongoose.Schema.Types.ObjectId,
@@ -105,20 +123,20 @@ const propertySchema = new mongoose.Schema({
 
     slug: String,
 
-    checkInTime: {type:String, default:"11:00"},
-    checkOutTime: {type:String, default:"13:00"}
+    checkInTime: { type: String, default: "11:00" },
+    checkOutTime: { type: String, default: "13:00" }
 })
 
-propertySchema.pre("save", function(next){
-    this.slug=slugify(this.propertyName,{lower:true});
+propertySchema.pre("save", function (next) {
+    this.slug = slugify(this.propertyName, { lower: true });
     next();
 })
 
-propertySchema.pre("save", function(next){
-    this.address.city=this.address.city.toLowerCase().replaceAll(" ","");
+propertySchema.pre("save", function (next) {
+    this.address.city = this.address.city.toLowerCase().replaceAll(" ", "");
     next();
 })
 
-const Property= mongoose.model("Property", propertySchema);
+const Property = mongoose.model("Property", propertySchema);
 
-export {Property};
+export { Property };
