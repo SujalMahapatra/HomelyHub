@@ -47,15 +47,16 @@ const bookingSchema = new mongoose.Schema({
     { timestamps: true }
 )
 
-bookingSchema.pre(/^find/, function(next){
-    this.populate("user", populate({
-        path:property,
-        select: "maximumGuest images propertyName address"
-    })) 
+bookingSchema.pre(/^find/, function () {
+    this.populate("user");
 
-    next();
+    this.populate({
+        path: "property",
+        select: "maximumGuest images propertyName address"
+    })
+
 })
 
 const Booking = mongoose.model("Booking", bookingSchema);
 
-export {Booking};
+export { Booking };
