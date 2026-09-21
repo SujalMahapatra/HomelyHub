@@ -31,7 +31,7 @@ const propertySlice = createSlice({
 
         updateSearchParams:(state,action)=>{
             state.searchParams = Object.keys(action.payload).length ===0 ?{} :{
-                ...state.earchParams,
+                ...state.searchParams,
                 ...action.payload
 
             }
