@@ -20,11 +20,11 @@ const propertyDetailsSlice = createSlice({
     reducers:{
 
         getListRequest(state){
-            state.loading=true
+            state.loading=true;
         },
 
         getPropertyDetails(state, action){
-            state.propertydetails = action.payload;
+            state.propertydetails = action.payload; 
             state.loading = false;
         },
 
