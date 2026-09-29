@@ -6,10 +6,18 @@ import {router} from "./routes/userRoute.js";
 import { propertyRouter } from "./routes/propertyRouter.js";
 import { bookingRouter } from "./routes/bookingRouter.js";
 import { tripRouter } from "./routes/tripRouter.js";
+import cors from "cors";
 
 dotenv.config();
 
 const app = express();
+
+app.use(
+    cors({
+        origin: "https://homelyhub-web-app.netlify.app",
+        credentials: true,
+    })
+);
 
 //express-json
 app.use(express.json({limit:"100mb"}));

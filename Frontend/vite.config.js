@@ -6,8 +6,8 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy:{
-      '/api':{
-        target: 'https://homelyhub-xdq2.onrender.com',
+      "/api":{
+        target: "https://homelyhub-xdq2.onrender.com",
         changeOrigin: true,
         secure: false,
       }
